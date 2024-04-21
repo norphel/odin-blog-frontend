@@ -1,10 +1,16 @@
 import Header from "./components/Header";
+import PageTransition from "./components/PageTransition";
+import MouseScroll from "./components/ui/mouse-scroll";
+import { useState } from "react";
 
 const App = () => {
+  const [background, setBackground] = useState("bg-[#007FC9]");
+
   return (
-    <div className="max-w-screen min-h-screen flex flex-col bg-[#00A3FF]">
+    <div className={`min-h-screen max-h-screen flex flex-col ${background}`}>
       <Header />
-      <main className="flex-grow">
+      <main className="flex-grow flex flex-col justify-center items-center overflow-hidden relative">
+        <PageTransition setBackground={setBackground} />
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">
           <svg
             data-name="Layer 1"
@@ -19,6 +25,7 @@ const App = () => {
             ></path>
           </svg>
         </div>
+        <MouseScroll />
       </main>
     </div>
   );

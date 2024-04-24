@@ -19,11 +19,6 @@ export default {
         averiaLibre: ["Averia Libre", "sans-serif"],
       },
       backgroundImage: {
-        img1Small: "url('src/assets/images/1-s.webp')",
-        img2Small: "url('src/assets/images/2-s.webp')",
-        img3Small: "url('src/assets/images/3-s.webp')",
-        img4Small: "url('src/assets/images/4-s.webp')",
-        img5Small: "url('src/assets/images/5-s.webp')",
         img1Medium: "url('src/assets/images/1-m.webp')",
         img2Medium: "url('src/assets/images/2-m.webp')",
         img3Medium: "url('src/assets/images/3-m.webp')",

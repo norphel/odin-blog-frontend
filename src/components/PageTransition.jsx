@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Page1, Page2, Page3, Page4, Page5 } from "../pages";
+import { Page1, Page2, Page3, Page4, Page5, Page6 } from "../pages";
 
-const pages = [<Page1 />, <Page2 />, <Page3 />, <Page4 />, <Page5 />];
+const pages = [
+  <Page1 />,
+  <Page2 />,
+  <Page3 />,
+  <Page4 />,
+  <Page5 />,
+  <Page6 />,
+];
 
 const PageTransition = ({ setBackground }) => {
   const [currentPage, setCurrentPage] = useState(0);

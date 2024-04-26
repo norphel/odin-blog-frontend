@@ -11,7 +11,7 @@ const Header = () => {
         <div className="flex items-center gap-4 md:gap-6 lg:gap-8 text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px]">
           <Link to="/blogs">B L O G S</Link>
           <Link
-            to="/users/login"
+            to="/login"
             className="border border-[#00790C] rounded-lg text-[#00790C] py-1 px-3 font-bold"
           >
             Log In

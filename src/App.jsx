@@ -1,4 +1,4 @@
-import Header from "./components/Header";
+import PresentationHeader from "./components/PresentaionHeader";
 import PageTransition from "./components/PageTransition";
 import MouseScroll from "./components/ui/mouse-scroll";
 import { useState } from "react";
@@ -8,7 +8,7 @@ const App = () => {
 
   return (
     <div className={`min-h-screen max-h-screen flex flex-col ${background}`}>
-      <Header />
+      <PresentationHeader />
       <main className="flex-grow flex flex-col justify-center items-center overflow-hidden relative">
         <PageTransition setBackground={setBackground} />
         <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180">

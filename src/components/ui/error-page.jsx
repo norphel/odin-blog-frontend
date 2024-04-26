@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import Header from "../Header";
+import PresentationHeader from "../PresentaionHeader";
 import { Link } from "react-router-dom";
 
 export default function ErrorPage() {
@@ -10,7 +10,7 @@ export default function ErrorPage() {
       id="error-page"
       className={"min-h-screen max-h-screen flex flex-col bg-[#007FC9]"}
     >
-      <Header />
+      <PresentationHeader />
       <main className="flex-grow flex flex-col justify-center items-center overflow-hidden relative">
         <div className="flex flex-col justify-center items-center h-full w-3/4 md:w-2/4 mx-auto">
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold font-averiaLibre text-white mb-4">

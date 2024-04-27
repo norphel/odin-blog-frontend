@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import Hero from "./Hero";
+import Introduction from "./Introduction";
 
 const Home = () => {
   return (
@@ -7,6 +8,7 @@ const Home = () => {
       <Header />
       <main>
         <Hero />
+        <Introduction />
       </main>
     </div>
   );

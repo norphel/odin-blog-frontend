@@ -27,14 +27,14 @@ export default function ErrorPage() {
               ? ""
               : "Sorry, an unexpected error has occurred."}
           </p>
-          <p className="text-black text-md md:text-lg lg:text-xl">
-            <i>{error.statusText || error.message}</i>
+          <p className="text-black text-md md:text-lg lg:text-xl italic text-center">
+            {error.statusText || error.message}
           </p>
           <Link
             to={"/home"}
             className="border border-black text-black px-3 py-1 md:px-6 md:py-2 rounded-xl mt-4 font-bold text-sm md:text-lg lg:text-xl"
           >
-            H O M E
+            HOME
           </Link>
         </div>
       </main>

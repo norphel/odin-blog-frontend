@@ -1,5 +1,5 @@
 import Header from "./Header";
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "./ui/LoginForm";
 
 const LogInPage = () => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { cn } from "../utils/cn";
+import { Label } from "./label";
+import { Input } from "./input";
+import { cn } from "../../utils/cn";
 import { Link } from "react-router-dom";
 
 export function LoginForm() {

@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="mt-6 border-t-2">
       <div className="lg:relative top-40 flex flex-col justify-center items-center">
-        <img src={Logo} alt="logo" className="w-[200px] " />
+        <img src={Logo} alt="logo" className="w-24 md:w-36 lg:w-[200px] " />
         <h4 className="text-center italic text-slate-600">
           Let's unite today for a better future!
         </h4>

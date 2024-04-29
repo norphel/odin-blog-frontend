@@ -7,6 +7,7 @@ import ErrorPage from "./components/ui/error-page.jsx";
 import Home from "./components/Home.jsx";
 import LogInPage from "./components/LogInPage.jsx";
 import SignupPage from "./components/SignupPage.jsx";
+import Editor from "./components/Editor.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <SignupPage />,
+  },
+  {
+    path: "/dashboard/editor",
+    element: <Editor />,
   },
 ]);
 

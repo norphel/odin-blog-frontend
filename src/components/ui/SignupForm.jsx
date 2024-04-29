@@ -1,14 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import { Label } from "./label";
 import { Input } from "./input";
 import { cn } from "../../utils/cn";
 import { Link } from "react-router-dom";
+import { FormError } from "./form-error";
+import { FormSuccess } from "./form-success";
 
 export function SignupForm() {
-  const handleSubmit = (e) => {
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const handleSubmit = async (e) => {
+    setErrorMessage(null);
+    setSuccessMessage(null);
     e.preventDefault();
-    console.log("Form submitted");
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/v1/users/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        setErrorMessage(errorData.error);
+        return;
+      }
+
+      const result = await response.json();
+      setSuccessMessage(result.msg);
+    } catch (error) {
+      console.error("Error:", error);
+      setErrorMessage(error.message);
+    }
   };
+
   return (
     <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input ">
       <h2 className=" text-center font-bold text-xl text-neutral-800">
@@ -29,7 +64,7 @@ export function SignupForm() {
         <LabelInputContainer className="mb-4">
           <Label htmlFor="username">Username</Label>
           <Input
-            id="name"
+            id="username"
             placeholder="johndoe"
             type="text"
             name="username"
@@ -56,8 +91,11 @@ export function SignupForm() {
             required
           />
         </LabelInputContainer>
+        <FormError message={errorMessage} />
+        <FormSuccess message={successMessage} />
+
         <button
-          className="bg-[#007FC9] relative group/btn block w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] "
+          className="bg-[#007FC9] mt-4 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] "
           type="submit"
         >
           Create an account &rarr;

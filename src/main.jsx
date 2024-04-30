@@ -9,6 +9,9 @@ import LogInPage from "./components/LogInPage.jsx";
 import SignupPage from "./components/SignupPage.jsx";
 import Editor from "./components/Editor.jsx";
 import Dashboard from "./components/Dashboard.jsx";
+import MyProfile from "./components/MyProfile.jsx";
+import MyPosts from "./components/MyPosts.jsx";
+import Settings from "./components/Settings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,20 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path: "profile",
+        element: <MyProfile />,
+      },
+      {
+        path: "myposts",
+        element: <MyPosts />,
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+    ],
   },
   {
     path: "/dashboard/editor",

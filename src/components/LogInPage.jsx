@@ -1,10 +1,8 @@
-import Header from "./Header";
 import { LoginForm } from "./ui/LoginForm";
 
 const LogInPage = () => {
   return (
-    <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-auto min-h-screen flex flex-col">
-      <Header />
+    <div>
       <main className="flex-grow flex items-center">
         <LoginForm />
       </main>

@@ -1,9 +1,9 @@
-import PresentationHeader from "./components/PresentaionHeader";
-import PageTransition from "./components/PageTransition";
-import MouseScroll from "./components/ui/mouse-scroll";
+import PresentationHeader from "./PresentaionHeader";
+import PageTransition from "./PageTransition";
+import MouseScroll from "./ui/mouse-scroll";
 import { useState } from "react";
 
-const App = () => {
+const Presentation = () => {
   const [background, setBackground] = useState("bg-[#007FC9]");
 
   return (
@@ -31,4 +31,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Presentation;

@@ -98,10 +98,10 @@ const Editor = () => {
   return (
     <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-auto min-h-screen">
       <Heading />
-      <div id="editorjs" className="border m-6 rounded-md "></div>
+      <div id="editorjs" className="border m-6 md:mx-0 rounded-md "></div>
       <button
         onClick={handleSave}
-        className="mx-6 px-4 py-1 rounded-xl bg-emerald-100 text-emerald-900 bold"
+        className="mx-6 md:mx-0 px-4 py-1 rounded-xl bg-emerald-100 text-emerald-900 bold"
       >
         Save
       </button>

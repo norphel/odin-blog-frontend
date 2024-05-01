@@ -21,7 +21,7 @@ const Introduction = () => {
           about our Earth, our Nature, our Home
         </p>
         <Link
-          to="/blogs"
+          to="/signup"
           className="px-6 py-2 bg-emerald-200 text-emerald-900 font-semibold rounded-lg"
         >
           Get Started

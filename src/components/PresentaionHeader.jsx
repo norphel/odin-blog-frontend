@@ -34,7 +34,7 @@ const PresentationHeader = () => {
         </nav>
       </div>
       <Link
-        to="/home"
+        to="/"
         className="absolute top-5 right-6 md:top-6 md:right-12 w-6 md:w-8"
       >
         <svg

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
-import { Label } from "./label";
-import { Input } from "./input";
-import { cn } from "../../utils/cn";
+import React, { useState, useContext } from "react";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { cn } from "../utils/cn";
 import { Link, useNavigate } from "react-router-dom";
-import { FormError } from "./form-error";
+import { FormError } from "./ui/form-error";
+
+import { UserContext } from "./Home";
 
 export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState(null);
-
+  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -34,7 +36,12 @@ export function LoginForm() {
       }
 
       const result = await response.json();
-      console.log(result);
+      // Save the user to the context
+      setUser(result.user);
+
+      // Also save the user to localStorage
+      localStorage.setItem("user", JSON.stringify(result.user));
+
       navigate("/dashboard");
     } catch (error) {
       console.error("Error:", error);

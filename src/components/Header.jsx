@@ -2,7 +2,8 @@ import Logo from "../assets/images/Logo.svg";
 import { Link } from "react-router-dom";
 import { IconPlayerPlay } from "@tabler/icons-react";
 
-const Header = () => {
+const Header = ({ user }) => {
+  console.log(user);
   return (
     <header className="border-b pb-2">
       <nav className="flex flex-col md:flex-row gap-2 justify-between items-center">

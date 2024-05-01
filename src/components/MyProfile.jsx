@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { UserContext } from "./Home";
+
 const MyProfile = () => {
+  const { user } = useContext(UserContext);
+
   return (
     <>
       <div className="flex flex-col md:flex-row gap-4 items-center md:items-start">
@@ -7,8 +12,8 @@ const MyProfile = () => {
         </div>
 
         <div className="text-center md:text-left">
-          <h2 className="pt-2">FirstName LastName</h2>
-          <p className="italic text-slate-600">username</p>
+          <h2 className="pt-2">{user.displayName}</h2>
+          <p className="italic text-slate-600">{user.username}</p>
         </div>
       </div>
     </>

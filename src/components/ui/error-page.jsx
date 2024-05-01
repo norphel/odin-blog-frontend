@@ -31,7 +31,7 @@ export default function ErrorPage() {
             {error.statusText || error.message}
           </p>
           <Link
-            to={"/home"}
+            to={"/"}
             className="border border-black text-black px-3 py-1 md:px-6 md:py-2 rounded-xl mt-4 font-bold text-sm md:text-lg lg:text-xl"
           >
             HOME

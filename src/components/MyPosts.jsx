@@ -75,7 +75,7 @@ const MyPosts = () => {
             />
           </div>
 
-          <div className="mt-4 flex gap-4">
+          <div className="mt-4 flex gap-4 flex-wrap justify-center">
             <button
               onClick={() => handleChangePublishStatus(article)}
               className={cn(

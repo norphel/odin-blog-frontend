@@ -1,9 +1,9 @@
 import Logo from "../assets/images/Logo.svg";
 import { Link } from "react-router-dom";
 import { IconPlayerPlay } from "@tabler/icons-react";
+import LoggedinUserMenu from "./ui/loggedin-user-menu";
 
 const Header = ({ user }) => {
-  console.log(user);
   return (
     <header className="border-b pb-2">
       <nav className="flex flex-col md:flex-row gap-2 justify-between items-center">
@@ -14,15 +14,19 @@ const Header = ({ user }) => {
           <Link to="/presentation">
             <IconPlayerPlay />
           </Link>
-          <Link to="/blogs" className="tracking-widest">
+          <Link to="/articles" className="tracking-widest">
             ARTICLES
           </Link>
-          <Link
-            to="/login"
-            className="border border-[#00790C] rounded-lg text-[#00790C] py-1 px-3 font-bold"
-          >
-            Log In
-          </Link>
+          {user === null ? (
+            <Link
+              to="/login"
+              className="border border-[#00790C] rounded-lg text-[#00790C] py-1 px-3 font-bold"
+            >
+              Log In
+            </Link>
+          ) : (
+            <LoggedinUserMenu user={user} />
+          )}
         </div>
       </nav>
     </header>

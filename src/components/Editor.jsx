@@ -9,6 +9,7 @@ import Embed from "@editorjs/embed";
 import Heading from "./Header";
 import { FormError } from "./ui/form-error";
 import { FormSuccess } from "./ui/form-success";
+import { useNavigate } from "react-router-dom";
 
 const DEFAULT_INITIAL_DATA = {
   time: new Date().getTime(),
@@ -29,6 +30,8 @@ const Editor = () => {
   const [successMessage, setSuccessMessage] = useState(null);
   const [isPending, setPending] = useState(false);
   const ejsInstance = useRef();
+
+  const navigate = useNavigate();
 
   const initEditor = () => {
     const editor = new EditorJS({
@@ -117,6 +120,8 @@ const Editor = () => {
       console.log(response);
       setSuccessMessage("Saved successfully");
       setPending(false);
+
+      navigate("/dashboard/myposts");
     } catch (error) {
       console.log("Failed: ", error);
       setErrorMessage(`Failed to save! ${error.message}`);

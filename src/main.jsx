@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import ErrorPage from "./components/ui/error-page.jsx";
 import {
+  AllArticles,
   Dashboard,
   Editor,
   Home,
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <LandingPage />,
+      },
+      {
+        path: "articles",
+        element: <AllArticles />,
       },
       {
         path: "login",

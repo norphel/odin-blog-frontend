@@ -8,7 +8,14 @@ const MyProfile = () => {
     <>
       <div className="flex flex-col md:flex-row gap-4 items-center md:items-start">
         <div className="w-2/4 aspect-square md:w-1/4 rounded-full">
-          <img src="https://avatar.iran.liara.run/public/3" alt="user avatar" />
+          <img
+            src={
+              user.profilePicture === undefined
+                ? "https://avatar.iran.liara.run/public/3"
+                : `${user.profilePicture}`
+            }
+            alt="user avatar"
+          />
         </div>
 
         <div className="text-center md:text-left">

@@ -1,11 +1,99 @@
+import { useContext, useState, useEffect } from "react";
+import { UserContext } from "./Home";
+import { cn } from "../utils/cn";
+
 const MyPosts = () => {
+  const [myarticles, setMyarticles] = useState([]);
+  const { user } = useContext(UserContext);
+
+  useEffect(() => {
+    const fetchAllMyPosts = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/v1/posts/user/${user._id}/all`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+
+        const data = await response.json();
+        console.log(data.posts);
+        setMyarticles(data.posts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAllMyPosts();
+  }, []);
+
+  const handleChangePublishStatus = async (article) => {
+    try {
+      const isPublished = !article.isPublished;
+      console.log(isPublished);
+
+      const response = await fetch(
+        `http://localhost:3000/api/v1/posts/${article._id}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            isPublished: isPublished.toString(),
+          }),
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+
+      if (response.ok) {
+        const updatedArticles = myarticles.map((art) =>
+          art._id === article._id ? { ...art, isPublished: isPublished } : art
+        );
+        setMyarticles(updatedArticles);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <>
-      <p>Lists of my posts</p>
-      <ul>
-        <li>post 1</li>
-      </ul>
-    </>
+    <div className=" my-6 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
+      {myarticles.map((article) => (
+        <div key={article._id} className="shadow-md rounded-xl py-2 px-6">
+          <h2 className="font-semibold text-[20px] md:text-[24px] lg:text-[28px]">
+            {article.title}
+          </h2>
+          <div className="border">
+            <img
+              src={article.thumbnailImage}
+              alt="thumbnail image"
+              className="w-full max-h-80"
+            />
+          </div>
+
+          <div className="mt-4 flex gap-4">
+            <button
+              onClick={() => handleChangePublishStatus(article)}
+              className={cn(
+                article.isPublished === true
+                  ? "bg-red-100 text-red-900"
+                  : "bg-emerald-100 text-emerald-900",
+                "px-4 py-1  rounded-lg"
+              )}
+            >
+              {article.isPublished === true ? "Unpublish" : "Publish"}
+            </button>
+            <button className="bg-blue-100 text-blue-900 px-4 py-1 rounded-lg">
+              Edit
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 };
 

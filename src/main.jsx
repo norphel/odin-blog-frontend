@@ -5,6 +5,7 @@ import "./index.css";
 import ErrorPage from "./components/ui/error-page.jsx";
 import {
   AllArticles,
+  Article,
   Dashboard,
   Editor,
   Home,
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "articles",
         element: <AllArticles />,
+      },
+      {
+        path: "articles/:articleID",
+        element: <Article />,
       },
       {
         path: "login",

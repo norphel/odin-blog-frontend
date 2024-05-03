@@ -62,35 +62,41 @@ const MyPosts = () => {
   return (
     <div className=" my-6 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
       {myarticles.map((article) => (
-        <div key={article._id} className="shadow-md rounded-xl py-2 px-6">
-          <h2 className="font-semibold text-[20px] md:text-[24px] lg:text-[28px]">
-            {article.title}
-          </h2>
-          <div className="border">
-            <img
-              src={article.thumbnailImage}
-              alt="thumbnail image"
-              className="w-full max-h-80"
-            />
-          </div>
+        <Link
+          key={article._id}
+          to={`/articles/${article._id}`}
+          className="cursoer-pointer"
+        >
+          <div className="shadow-md rounded-xl py-2 px-6">
+            <h2 className="font-semibold text-[20px] md:text-[24px] lg:text-[28px]">
+              {article.title}
+            </h2>
+            <div className="border">
+              <img
+                src={article.thumbnailImage}
+                alt="thumbnail image"
+                className="w-full max-h-80"
+              />
+            </div>
 
-          <div className="mt-4 flex gap-4 flex-wrap justify-center">
-            <button
-              onClick={() => handleChangePublishStatus(article)}
-              className={cn(
-                article.isPublished === true
-                  ? "bg-red-100 text-red-900"
-                  : "bg-emerald-100 text-emerald-900",
-                "px-4 py-1  rounded-lg"
-              )}
-            >
-              {article.isPublished === true ? "Unpublish" : "Publish"}
-            </button>
-            <button className="bg-blue-100 text-blue-900 px-4 py-1 rounded-lg">
-              Edit
-            </button>
+            <div className="mt-4 flex gap-4 flex-wrap justify-center">
+              <button
+                onClick={() => handleChangePublishStatus(article)}
+                className={cn(
+                  article.isPublished === true
+                    ? "bg-red-100 text-red-900"
+                    : "bg-emerald-100 text-emerald-900",
+                  "px-4 py-1  rounded-lg"
+                )}
+              >
+                {article.isPublished === true ? "Unpublish" : "Publish"}
+              </button>
+              <button className="bg-blue-100 text-blue-900 px-4 py-1 rounded-lg">
+                Edit
+              </button>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
       <Link
         to="/editor"

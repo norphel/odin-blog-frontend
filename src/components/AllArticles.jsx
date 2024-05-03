@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Article from "./ui/article-card";
+import { Link } from "react-router-dom";
 
 const AllArticles = () => {
   const [articlces, setArticles] = useState([]);
@@ -23,7 +24,13 @@ const AllArticles = () => {
   return (
     <main className=" my-6 grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-4">
       {articlces.map((article) => (
-        <Article key={article._id} article={article} />
+        <Link
+          key={article._id}
+          to={`/articles/${article._id}`}
+          className="cursor-pointer"
+        >
+          <Article article={article} />
+        </Link>
       ))}
     </main>
   );

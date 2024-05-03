@@ -1,4 +1,5 @@
 import AllArticles from "./AllArticles";
+import Article from "./Article";
 import Dashboard from "./Dashboard";
 import Editor from "./Editor";
 import Home from "./Home";
@@ -12,6 +13,7 @@ import SignupPage from "./SignupPage";
 
 export {
   AllArticles,
+  Article,
   Dashboard,
   Editor,
   Home,

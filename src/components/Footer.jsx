@@ -11,7 +11,7 @@ const Footer = () => {
           Let's unite today for a better future!
         </h4>
         <Link
-          to="/blogs"
+          to="/articles"
           className="tracking-[0.3rem] bg-emerald-200 px-6 py-2 rounded-xl mt-4"
         >
           ARTICLES

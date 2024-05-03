@@ -25,7 +25,7 @@ const Header = ({ user }) => {
               Log In
             </Link>
           ) : (
-            <LoggedinUserMenu user={user} />
+            <LoggedinUserMenu />
           )}
         </div>
       </nav>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import SimpleImage from "@editorjs/simple-image";
@@ -6,10 +6,9 @@ import Quote from "@editorjs/quote";
 import NestedList from "@editorjs/nested-list";
 import LinkTool from "@editorjs/link";
 import Embed from "@editorjs/embed";
-import Heading from "./Header";
 import { FormError } from "./ui/form-error";
 import { FormSuccess } from "./ui/form-success";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const DEFAULT_INITIAL_DATA = {
   time: new Date().getTime(),
@@ -131,7 +130,6 @@ const Editor = () => {
 
   return (
     <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-auto min-h-screen">
-      <Heading />
       <label htmlFor="title" className="mt-4 mb-2 block font-semibold">
         Title
       </label>
@@ -159,12 +157,20 @@ const Editor = () => {
 
       <FormError message={errorMessage} />
       <FormSuccess message={successMessage} />
-      <button
-        onClick={handleSave}
-        className="mx-6 md:mx-0 my-6 px-4 py-1 rounded-xl bg-emerald-100 text-emerald-900 bold"
-      >
-        {isPending === true ? "Saving..." : "Save"}
-      </button>
+      <div className="flex gap-4 flex-wrap justify-center my-6">
+        <button
+          onClick={handleSave}
+          className="mx-6 md:mx-0  px-4 py-1 rounded-xl bg-emerald-100 text-emerald-900 bold"
+        >
+          {isPending === true ? "Saving..." : "Save"}
+        </button>
+        <Link
+          to="/dashboard/myposts"
+          className="mx-6 md:mx-0  px-4 py-1 rounded-xl bg-red-100 text-red-900 bold"
+        >
+          Cancel
+        </Link>
+      </div>
     </div>
   );
 };

@@ -40,6 +40,10 @@ const router = createBrowserRouter([
         element: <SignupPage />,
       },
       {
+        path: "/editor",
+        element: <Editor />,
+      },
+      {
         path: "dashboard",
         element: <Dashboard />,
         children: [
@@ -62,10 +66,6 @@ const router = createBrowserRouter([
   {
     path: "/presentation",
     element: <Presentation />,
-  },
-  {
-    path: "/editor",
-    element: <Editor />,
   },
 ]);
 

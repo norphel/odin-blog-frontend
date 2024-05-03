@@ -11,7 +11,7 @@ const MyProfile = () => {
           <img
             src={
               user.profilePicture === undefined
-                ? "https://avatar.iran.liara.run/public/3"
+                ? `https://avatar.iran.liara.run/username?username=${user.displayName}`
                 : `${user.profilePicture}`
             }
             alt="user avatar"

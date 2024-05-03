@@ -6,7 +6,7 @@ const Dashboard = () => {
   return (
     <div>
       <div className="flex flex-col md:flex-row mt-6 border rounded-md">
-        <div className="p-4 flex md:flex-col gap-4 justify-between border-b md:border-r md:border-b-0">
+        <div className="p-4 flex md:flex-col gap-4 justify-between md:justify-start border-b md:border-r md:border-b-0">
           <Link to="profile" className="flex gap-2 items-center">
             <IconUser className="w-8 h-8" />
             <p className="hidden md:block">My Profile</p>

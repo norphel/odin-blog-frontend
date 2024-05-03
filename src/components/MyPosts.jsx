@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "./Home";
 import { cn } from "../utils/cn";
+import { Link } from "react-router-dom";
 
 const MyPosts = () => {
   const [myarticles, setMyarticles] = useState([]);
@@ -18,7 +19,6 @@ const MyPosts = () => {
         );
 
         const data = await response.json();
-        console.log(data.posts);
         setMyarticles(data.posts);
       } catch (error) {
         console.log(error);
@@ -30,7 +30,6 @@ const MyPosts = () => {
   const handleChangePublishStatus = async (article) => {
     try {
       const isPublished = !article.isPublished;
-      console.log(isPublished);
 
       const response = await fetch(
         `http://localhost:3000/api/v1/posts/${article._id}`,
@@ -93,6 +92,12 @@ const MyPosts = () => {
           </div>
         </div>
       ))}
+      <Link
+        to="/editor"
+        className=" shadow-md rounded-lg flex justify-center items-center p-6 text-4xl"
+      >
+        +
+      </Link>
     </div>
   );
 };

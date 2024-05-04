@@ -33,7 +33,7 @@ export default {
       },
     },
   },
-  plugins: [addVariablesForColors],
+  plugins: [require("@tailwindcss/typography"), addVariablesForColors],
 };
 
 function addVariablesForColors({ addBase, theme }) {

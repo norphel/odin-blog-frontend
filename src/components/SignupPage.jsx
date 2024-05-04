@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { UserContext } from "./Home";
+import { UserContext } from "../main";
 import { useNavigate } from "react-router-dom";
 
 import { SignupForm } from "./ui/SignupForm";

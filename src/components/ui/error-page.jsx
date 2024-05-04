@@ -6,6 +6,11 @@ import cherryblossom from "../../assets/images/cherry-blossom.gif";
 export default function ErrorPage() {
   const error = useRouteError();
 
+  // If error is null, assume it's a 404 error
+  const isNotFound = !error;
+  const statusText = error?.statusText;
+  const message = error?.message;
+
   return (
     <div
       id="error-page"
@@ -20,15 +25,13 @@ export default function ErrorPage() {
         />
         <div className="absolute top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 z-1 bg-white/30 backdrop-blur-md p-6 rounded-lg flex flex-col justify-center items-center">
           <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold font-averiaLibre text-black mb-4">
-            {error.statusText === "Not Found" ? "404" : "Oops!"}
+            {isNotFound ? "404" : "Oops!"}
           </h1>
           <p className="text-lg md:text-xl lg:text-2xl italic text-black">
-            {error.statusText === "Not Found"
-              ? ""
-              : "Sorry, an unexpected error has occurred."}
+            {isNotFound ? "" : "Sorry, an unexpected error has occurred."}
           </p>
           <p className="text-black text-md md:text-lg lg:text-xl italic text-center">
-            {error.statusText || error.message}
+            {statusText || message}
           </p>
           <Link
             to={"/"}

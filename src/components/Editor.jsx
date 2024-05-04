@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import EditorJS from "@editorjs/editorjs";
 import Header from "@editorjs/header";
 import SimpleImage from "@editorjs/simple-image";
@@ -45,6 +45,10 @@ const Editor = () => {
           class: Header,
           inlineToolbar: true,
           shortcut: "CMD+SHIFT+H",
+          config: {
+            levels: [2, 3, 4, 5, 6],
+            defaultLevel: 2,
+          },
         },
         image: SimpleImage,
         quote: {

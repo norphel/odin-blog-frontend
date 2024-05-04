@@ -5,7 +5,7 @@ import { cn } from "../utils/cn";
 import { Link, useNavigate } from "react-router-dom";
 import { FormError } from "./ui/form-error";
 
-import { UserContext } from "./Home";
+import { UserContext } from "../main";
 
 export function LoginForm() {
   const [errorMessage, setErrorMessage] = useState(null);

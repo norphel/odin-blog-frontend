@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { UserContext } from "../Home";
+import { UserContext } from "../../main";
 
 const LoggedinUserMenu = () => {
   const { user, setUser } = useContext(UserContext);

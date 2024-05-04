@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect } from "react";
-import { UserContext } from "./Home";
+import { UserContext } from "../main";
 import { cn } from "../utils/cn";
 import { Link } from "react-router-dom";
 

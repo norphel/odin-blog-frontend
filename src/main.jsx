@@ -8,6 +8,7 @@ import {
   AllArticles,
   Article,
   Dashboard,
+  EditArticle,
   Editor,
   Home,
   LandingPage,
@@ -30,7 +31,7 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Home user={user} />,
       errorElement: <ErrorPage />,
       children: [
         {
@@ -56,6 +57,10 @@ const App = () => {
         {
           path: "/editor",
           element: <Editor />,
+        },
+        {
+          path: "/editor/:articleID",
+          element: <EditArticle />,
         },
         {
           path: "dashboard",

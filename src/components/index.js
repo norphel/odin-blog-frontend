@@ -1,6 +1,7 @@
 import AllArticles from "./AllArticles";
 import Article from "./Article";
 import Dashboard from "./Dashboard";
+import EditArticle from "./EditArticle";
 import Editor from "./Editor";
 import Home from "./Home";
 import LandingPage from "./LandingPage";
@@ -15,6 +16,7 @@ export {
   AllArticles,
   Article,
   Dashboard,
+  EditArticle,
   Editor,
   Home,
   LandingPage,

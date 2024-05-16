@@ -1,0 +1,191 @@
+import React, { useRef, useEffect, useState } from "react";
+import EditorJS from "@editorjs/editorjs";
+import Header from "@editorjs/header";
+import SimpleImage from "@editorjs/simple-image";
+import Quote from "@editorjs/quote";
+import NestedList from "@editorjs/nested-list";
+import LinkTool from "@editorjs/link";
+import Embed from "@editorjs/embed";
+import { FormError } from "./ui/form-error";
+import { FormSuccess } from "./ui/form-success";
+import { useNavigate, Link, useLocation } from "react-router-dom";
+
+const EditArticle = () => {
+  const [title, setTitle] = useState("");
+  const [thumbnailImage, setThumbnailImage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  const [isPending, setPending] = useState(false);
+  const ejsInstance = useRef();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const articleToEdit = location.state?.article;
+
+  useEffect(() => {
+    if (articleToEdit) {
+      setTitle(articleToEdit.title);
+    }
+  }, [articleToEdit]);
+
+  const initEditor = (initialData) => {
+    const editor = new EditorJS({
+      holder: "editorjs",
+      onReady: () => {
+        ejsInstance.current = editor;
+      },
+      autofocus: true,
+      data: initialData,
+      tools: {
+        header: {
+          class: Header,
+          inlineToolbar: true,
+          shortcut: "CMD+SHIFT+H",
+          config: {
+            levels: [2, 3, 4, 5, 6],
+            defaultLevel: 2,
+          },
+        },
+        image: SimpleImage,
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          shortcut: "CMD+SHIFT+O",
+          config: {
+            quotePlaceholder: "Enter a quote",
+            captionPlaceholder: "Quote's author",
+          },
+        },
+        list: {
+          class: NestedList,
+          inlineToolbar: true,
+        },
+        linkTool: {
+          class: LinkTool,
+        },
+        embed: {
+          class: Embed,
+          inlineToolbar: true,
+          config: {
+            services: {
+              youtube: true,
+              facebook: true,
+              instagram: true,
+              twitter: true,
+            },
+          },
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (ejsInstance.current === null) {
+      let parser = new DOMParser();
+      let dom = parser.parseFromString(
+        "<!doctype html><body>" + articleToEdit.content,
+        "text/html"
+      );
+      let decodedString = dom.body.textContent;
+
+      let decodedContent = JSON.parse(decodedString);
+
+      const initialData = decodedContent;
+      initEditor(initialData);
+    }
+
+    return () => {
+      ejsInstance?.current?.destroy();
+      ejsInstance.current = null;
+    };
+  }, [articleToEdit]);
+
+  const handleSave = async () => {
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    setPending(true);
+
+    try {
+      let formData = new FormData();
+
+      if (title === "") throw new Error("Title of post is required!");
+      formData.append("title", title);
+
+      if (thumbnailImage === null)
+        throw new Error("Please provide a thumbnail image");
+      formData.append("thumbnailImage", thumbnailImage);
+
+      if (ejsInstance.current) {
+        const data = await ejsInstance.current.save();
+        console.log(data);
+        formData.append("content", JSON.stringify(data));
+      }
+
+      const response = await fetch(
+        `http://localhost:3000/api/v1/posts/${articleToEdit._id}/edit`,
+        {
+          method: "PATCH",
+          body: formData,
+          credentials: "include",
+        }
+      );
+      console.log(response);
+      setSuccessMessage("Saved successfully");
+      setPending(false);
+
+      navigate("/dashboard/myposts");
+    } catch (error) {
+      console.log("Failed: ", error);
+      setErrorMessage(`Failed to save! ${error.message}`);
+      setPending(false);
+    }
+  };
+
+  return (
+    <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-auto min-h-screen">
+      <label htmlFor="title" className="mt-4 mb-2 block font-semibold">
+        Title
+      </label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value={title}
+        required
+        onChange={(e) => setTitle(e.target.value)}
+        className="border  w-full p-1 rounded-md"
+      />
+      <label htmlFor="thumbnailImage" className="mt-4 mb-2 block font-semibold">
+        Thumbnail/Cover Image
+      </label>
+      <input
+        type="file"
+        id="thumbnailImage"
+        name="thumbnailImage"
+        required
+        onChange={(e) => setThumbnailImage(e.target.files[0])}
+      />
+      <p className="mt-4 mb-2 font-semibold">Content</p>
+      <div id="editorjs" className="border mx-6 mb-6 md:mx-0 rounded-md "></div>
+
+      <FormError message={errorMessage} />
+      <FormSuccess message={successMessage} />
+      <div className="flex gap-4 flex-wrap justify-center my-6">
+        <button
+          onClick={handleSave}
+          className="mx-6 md:mx-0  px-4 py-1 rounded-xl bg-emerald-100 text-emerald-900 bold"
+        >
+          {isPending === true ? "Updating..." : "Update"}
+        </button>
+        <Link
+          to="/dashboard/myposts"
+          className="mx-6 md:mx-0  px-4 py-1 rounded-xl bg-red-100 text-red-900 bold"
+        >
+          Cancel
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default EditArticle;

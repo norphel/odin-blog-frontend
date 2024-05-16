@@ -142,7 +142,7 @@ const EditArticle = () => {
   };
 
   return (
-    <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-auto min-h-screen">
+    <div className="mt-2 max-w-screen-xl mx-2 md:mx-4 lg:mx-6 xl:mx-8 min-h-screen">
       <label htmlFor="title" className="mt-4 mb-2 block font-semibold">
         Title
       </label>

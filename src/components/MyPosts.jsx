@@ -3,6 +3,7 @@ import { UserContext } from "../main";
 import { cn } from "../utils/cn";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { IconPencil, IconTrash } from "@tabler/icons-react";
 
 const MyPosts = () => {
   const [myarticles, setMyarticles] = useState([]);
@@ -34,7 +35,7 @@ const MyPosts = () => {
       const isPublished = !article.isPublished;
 
       const response = await fetch(
-        `http://localhost:3000/api/v1/posts/${article._id}`,
+        `http://localhost:3000/api/v1/posts/${article._id}/published`,
         {
           method: "PATCH",
           body: JSON.stringify({
@@ -66,7 +67,27 @@ const MyPosts = () => {
   };
 
   const handleDelete = async (article) => {
-    // delete the article
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/v1/posts/${article._id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+
+      const deleteStatus = await response.json();
+      console.log(deleteStatus);
+
+      if (response.ok) {
+        const remainingArticles = myarticles.filter(
+          (art) => art._id !== article._id
+        );
+        setMyarticles(remainingArticles);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -98,18 +119,20 @@ const MyPosts = () => {
             >
               {article.isPublished === true ? "Unpublish" : "Publish"}
             </button>
-            <button
-              onClick={() => handleEdit(article)}
-              className="bg-blue-100 text-blue-900 px-4 py-1 rounded-lg"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(article)}
-              className="bg-red-500 text-white font-bold px-4 py-1 rounded-lg"
-            >
-              Delete
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleEdit(article)}
+                className="bg-blue-100 text-blue-900 px-4 py-1 rounded-lg"
+              >
+                <IconPencil />
+              </button>
+              <button
+                onClick={() => handleDelete(article)}
+                className="bg-red-500 text-white font-bold px-4 py-1 rounded-lg"
+              >
+                <IconTrash />
+              </button>
+            </div>
           </div>
         </div>
       ))}
